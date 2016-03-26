@@ -9,7 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Tutorial extends JavaPlugin implements Listener{
 	public void onEnable()
 	{
-		getServer().getPluginManager().registerEvents(this, this);
+		getServer().getPluginManager().registerEvents(this, this); //リスナ登録
 	}
 	public void onDisable()
 	{

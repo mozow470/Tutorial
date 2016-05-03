@@ -19,6 +19,7 @@ public class Inv extends Menu{
 		this.setGroup(group);
 	}
 
+// 1秒ごとにmenuを更新する onRunは1秒に1回呼び出される
 	@Override
 	public void onRun() {
 		if(this.getGroup() != null){

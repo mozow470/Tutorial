@@ -14,8 +14,8 @@ import com.github.mozow470.serverstats.menu.Menu;
 
 public class Inv extends Menu{
 
-	public Inv(String name, int slet,Group group) {
-		super(name, slet);
+	public Inv(String name, int slot,Group group) {
+		super(name, slot);
 		this.setGroup(group);
 	}
 

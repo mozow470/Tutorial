@@ -39,3 +39,11 @@ public boolean addDamage(Entity e, double damage){
 		}
 		return false;
 	}
+
+
+for(Entity e:loc.getWorld().getEntities()){
+			if(e.getLocation().distanceSquared(loc) <= 0.64 || e.getLocation().add(0,1.0,0).distanceSquared(loc)<= 0.9){
+				return !this.addDamage(e, damage);
+			}
+
+		}

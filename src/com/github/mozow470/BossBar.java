@@ -8,28 +8,29 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
+import org.bukkit.util.Vector;
 
 import com.github.mozow470.guns.packet.PacketUtil;
 import com.github.mozow470.guns.support.GunPlayer;
 
 public class BossBar {
 
-	public GunPlayer info;
-	public EntityEnderDragon entity;
-	public String message;
+	private GunPlayer info; //表示するPlayer
+	private EntityEnderDragon entity; //Entity
+	private String message; //表示中メッセージ
 
-	public boolean display;
-	public World spawnWorld;
+	private boolean display; //表示中か
+	private World spawnWorld;
 	private int ticks;
 
-	private int deley;
+	private int deley; //更新間隔
 	
-	private float health;
+	private float health; //bar
 
 	public BossBar(GunPlayer player){
 		info=player;
 		spawnWorld=player.getLocation().getWorld();
-		deley=10;
+		deley=5;
 		display=false;
 		health=300.0F;
 	}
@@ -55,6 +56,7 @@ public class BossBar {
 			//ワールドが変更された場合
 			//消す -> 再スポーン
 			if(!playWorld.getName().equals(spawnWorld.getName())){
+				spawnWorld=playWorld;
 				if(this.isDisplay()){
 					this.setNewBossBar(getDisplay());
 				}
@@ -66,8 +68,9 @@ public class BossBar {
 	private Block getTargetedBlock(int range) {
 		Block block = null;
 		Location start = info.getBukkitPlayer().getEyeLocation();
+		Vector vec = start.getDirection();
 		for (int i = 0; i <= range; i++) {
-			Location point = start.add(start.getDirection());
+			Location point = start.add(vec);
 			block = point.getBlock();
 		}
 		return block;
@@ -92,7 +95,7 @@ public class BossBar {
 
 		entity=new EntityEnderDragon(world);
 		entity.setInvisible(true);
-		entity.setLocation(loc.getX(), loc.getY()-145, loc.getZ(), 0, 0);
+		entity.setLocation(loc.getX(), loc.getY()-140, loc.getZ(), 0, 0);
 		entity.setHealth(this.health);
 		entity.setCustomName(this.getDisplay());
 
@@ -117,7 +120,7 @@ public class BossBar {
 	}
 	
 	public void setGauge(int level){
-		this.health=level*30;
+		this.health=level*20;
 		this.getEntity().setHealth(this.health);
 	}
 
